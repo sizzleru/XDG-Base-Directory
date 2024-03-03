@@ -4,4 +4,4 @@ source "${PWD}/variables.sh"
 source "${PWD}/folders.sh"
 ln -fsv "${PWD}/variables.sh" "${XDG_CONFIG_HOME}/XDG/variables.sh"
 szh prompt -s 'Would you like XDG variables be sourced automatically from .bashrc? (If not, source ~/.config/XDG/variables.sh manually)'
-echo "'source ${XDG_CONFIG_HOME}'" >> ~/.bashrc
+echo "source ${XDG_CONFIG_HOME}/XDG/variables.sh" >> ~/.bashrc
