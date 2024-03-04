@@ -1,24 +1,26 @@
 #!/bin/bash
 
 m_flag=false
-n_flag=false
+p_flag=false
 
-while getopts 'hmn' flag; do
-    case "$flag" in
-        h) szh usage '[-mh]' || exit 0 ;;
+while getopts 'hmp' flag; do
+    case "${flag}" in
+        h) szh usage '[-hmp]' || exit 0 ;;
         m) m_flag=true ;;
-        n) n_flag=true ;;
-        *) szh usage '[-mh]' || exit ;;
+        p) p_flag=true ;;
+        *) szh usage '[-hmp]' || exit ;;
     esac
 done
 
+SCRIPT_PATH="$(dirname $(realpath ${0}))"
+
 if [[ "${m_flag}" = true ]]; then
-    for package in $(find $PWD/packages/ -mindepth 1 -maxdepth 1 -exec basename {} \; -type f); do
-        source "${PWD}/packages/${package}"
+    for package in $(find "${SCRIPT_PATH}/packages" -mindepth 1 -maxdepth 1 -exec basename {} \; -type f); do
+        source "${SCRIPT_PATH}/packages/${package}"
     done
 fi
 
-if [[ "${n_flag}" = false ]]; then
+if [[ "${p_flag}" = true ]]; then
     szh prompt -s 'Would you like XDG variables be sourced automatically from .bashrc? (If not, source files from ~/.config/XDG manually)'
     echo "source ${XDG_CONFIG_HOME}/XDG/variables.sh" >> ~/.bashrc
     echo "source ${XDG_CONFIG_HOME}/XDG/packages.sh" >> ~/.bashrc
