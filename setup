@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CWD="${BASH_SOURCE[0]}"
+CWD="$(szh realpath "${0}")"
 
 source "${CWD}/variables.sh"
 source "${CWD}/folders.sh"
