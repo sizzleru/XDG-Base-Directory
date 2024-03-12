@@ -7,7 +7,7 @@ while getopts 'hmp' flag; do
     case "${flag}" in
         m) m_flag=true ;;
         p) p_flag=true ;;
-        *) szh usage '[-h(elp)m(igrate)p(rompt)]' || exit ;;
+        *) szh usage '[-h(elp)m(igrate)p(rompt)]' || exit 1 ;;
     esac
 done
 
