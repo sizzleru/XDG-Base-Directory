@@ -1,6 +1,11 @@
 #!/bin/bash
 
-source "${PWD}/variables.sh"
-source "${PWD}/folders.sh"
-ln -fsv "${PWD}/variables.sh" "${XDG_CONFIG_HOME}/XDG/variables.sh"
-ln -fsv "${PWD}/xdg" "${XDG_BIN_HOME}"
+CWD="$(szh realpath "${0}")"
+
+source "${CWD}/variables.sh"
+source "${CWD}/folders.sh"
+ln -fsv "${CWD}/variables.sh" "${XDG_CONFIG_HOME}/XDG/variables.sh"
+
+sudo ln -fsv "${CWD}/variables.sh" /etc/profile.d
+
+unset CWD

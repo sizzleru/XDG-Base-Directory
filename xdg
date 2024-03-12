@@ -5,18 +5,17 @@ p_flag=false
 
 while getopts 'hmp' flag; do
     case "${flag}" in
-        h) szh usage '[-hmp]' || exit 0 ;;
         m) m_flag=true ;;
         p) p_flag=true ;;
-        *) szh usage '[-hmp]' || exit ;;
+        *) szh usage '[-h(elp)m(igrate)p(rompt)]' || exit 1 ;;
     esac
 done
 
-SCRIPT_PATH="$(dirname $(realpath ${0}))"
+CWD="$(szh realpath "${0}")/packages"
 
 if [[ "${m_flag}" = true ]]; then
-    for package in $(find "${SCRIPT_PATH}/packages" -mindepth 1 -maxdepth 1 -exec basename {} \; -type f); do
-        source "${SCRIPT_PATH}/packages/${package}"
+    for package in $(szh find -c "${CWD}") ; do
+        source "${CWD}/${package}"
     done
 fi
 
